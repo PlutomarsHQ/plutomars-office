@@ -5,6 +5,10 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 background:#050816;
 color:white;
@@ -18,13 +22,10 @@ position:fixed;
 width:100%;
 height:100%;
 background:
-radial-gradient(
-white 1px,
-transparent 1px
-);
+radial-gradient(white 1px,transparent 1px);
 background-size:40px 40px;
 opacity:.15;
-z-index:-2;
+z-index:-10;
 }
 
 /* NAVBAR */
@@ -35,6 +36,7 @@ top:20px;
 left:50%;
 transform:translateX(-50%);
 width:90%;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -118,17 +120,17 @@ color:black;
 padding:16px 35px;
 border:none;
 border-radius:50px;
-font-weight:700;
 cursor:pointer;
+font-weight:700;
 }
 
 .secondary{
 background:transparent;
-color:white;
 border:1px solid white;
 padding:16px 35px;
 border-radius:50px;
 cursor:pointer;
+color:white;
 }
 
 /* MARS */
@@ -149,24 +151,103 @@ circle at 30% 30%,
 #6b1b00
 );
 
-top:100px;
-right:-100px;
+top:120px;
+right:-120px;
 
 opacity:.2;
-
-filter:blur(1px);
 
 animation:float 8s ease-in-out infinite;
 }
 
 @keyframes float{
-0%{
-transform:translateY(0);
+0%{transform:translateY(0);}
+50%{transform:translateY(-30px);}
+100%{transform:translateY(0);}
 }
-50%{
-transform:translateY(-30px);
+
+/* COMMON */
+
+.container{
+max-width:1200px;
+margin:auto;
 }
-100%{
-transform:translateY(0);
+
+.section-tag{
+color:#00d4ff;
+margin-bottom:20px;
+letter-spacing:2px;
 }
+
+/* ABOUT */
+
+.about{
+padding:120px 10%;
+}
+
+.about h2{
+font-size:60px;
+margin-bottom:25px;
+}
+
+.about-text{
+font-size:22px;
+line-height:1.8;
+color:#c9c9c9;
+}
+
+/* SERVICES */
+
+.services{
+padding:120px 10%;
+}
+
+.services h2{
+font-size:60px;
+margin-bottom:50px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+padding:30px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:20px;
+
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:#00d4ff;
+}
+
+.card h3{
+margin-bottom:15px;
+}
+
+/* CONTACT */
+
+.contact{
+padding:120px 10%;
+text-align:center;
+}
+
+.contact h2{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.contact-text{
+font-size:22px;
+color:#c9c9c9;
 }
