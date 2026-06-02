@@ -1,25 +1,47 @@
-/* ==================================
-   PLUTOMARS VERSION 4
-================================== */
+/* =================================
+   PLUTOMARS VERSION 5
+================================= */
 
-console.log("Plutomars V4 Loaded");
+console.log("Plutomars V5 Loaded");
 
-/* ==============================
+/* ===========================
    CUSTOM CURSOR
-============================== */
+=========================== */
 
 const cursor = document.querySelector(".cursor");
 
 document.addEventListener("mousemove", (e) => {
 
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+    if(cursor){
+
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+
+    }
 
 });
 
-/* ==============================
+/* ===========================
+   SPOTLIGHT EFFECT
+=========================== */
+
+document.addEventListener("mousemove", (e) => {
+
+    document.body.style.setProperty(
+        "--mouse-x",
+        `${e.clientX}px`
+    );
+
+    document.body.style.setProperty(
+        "--mouse-y",
+        `${e.clientY}px`
+    );
+
+});
+
+/* ===========================
    CARD GLOW EFFECT
-============================== */
+=========================== */
 
 const cards = document.querySelectorAll(".card");
 
@@ -39,83 +61,93 @@ cards.forEach(card => {
 
 });
 
-/* ==============================
-   COUNTER ANIMATION
-============================== */
+/* ===========================
+   COUNTERS
+=========================== */
 
 const counters = document.querySelectorAll(".counter");
 
-const startCounter = () => {
+function startCounters(){
 
     counters.forEach(counter => {
 
-        const target = +counter.dataset.target;
+        const target = Number(counter.dataset.target);
 
         let count = 0;
 
-        const speed = target / 100;
+        const step = Math.max(1, target / 100);
 
-        const update = () => {
+        function update(){
 
-            count += speed;
+            count += step;
 
-            if (count < target) {
+            if(count < target){
 
-                counter.innerText = Math.floor(count);
+                counter.innerText =
+                Math.floor(count);
 
                 requestAnimationFrame(update);
 
-            } else {
+            }else{
 
-                counter.innerText = target + "+";
+                counter.innerText =
+                target + "+";
 
             }
 
-        };
+        }
 
         update();
 
     });
 
-};
+}
 
-/* ==============================
-   INTERSECTION OBSERVER
-============================== */
-
-const statsSection = document.querySelector(".stats");
+const statsSection =
+document.querySelector(".stats");
 
 let counterStarted = false;
 
-const observer = new IntersectionObserver((entries) => {
+if(statsSection){
 
-    entries.forEach(entry => {
+    const observer =
+    new IntersectionObserver((entries)=>{
 
-        if (entry.isIntersecting && !counterStarted) {
+        entries.forEach(entry=>{
 
-            startCounter();
+            if(
+                entry.isIntersecting &&
+                !counterStarted
+            ){
 
-            counterStarted = true;
+                startCounters();
 
-        }
+                counterStarted = true;
+
+            }
+
+        });
+
+    },{
+
+        threshold:0.4
 
     });
 
-}, {
-    threshold: 0.4
-});
-
-if(statsSection){
     observer.observe(statsSection);
+
 }
 
-/* ==============================
-   NAVBAR SCROLL EFFECT
-============================== */
+/* ===========================
+   NAVBAR EFFECT
+=========================== */
 
-const navbar = document.querySelector(".navbar");
+const navbar =
+document.querySelector(".navbar");
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
+
+    if(!navbar) return;
 
     if(window.scrollY > 50){
 
@@ -137,123 +169,163 @@ window.addEventListener("scroll", () => {
 
 });
 
-/* ==============================
-   GSAP ANIMATIONS
-============================== */
-
-if(typeof gsap !== "undefined"){
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.from(".hero-tag",{
-        y:40,
-        opacity:0,
-        duration:1
-    });
-
-    gsap.from(".hero h1",{
-        y:80,
-        opacity:0,
-        duration:1.2,
-        delay:.2
-    });
-
-    gsap.from(".hero-subtitle",{
-        y:50,
-        opacity:0,
-        duration:1,
-        delay:.4
-    });
-
-    gsap.from(".hero-buttons",{
-        y:40,
-        opacity:0,
-        duration:1,
-        delay:.6
-    });
-
-    gsap.utils.toArray(".card").forEach(card=>{
-
-        gsap.from(card,{
-            scrollTrigger:{
-                trigger:card,
-                start:"top 85%"
-            },
-            y:60,
-            opacity:0,
-            duration:.8
-        });
-
-    });
-
-    gsap.utils.toArray(".product").forEach(product=>{
-
-        gsap.from(product,{
-            scrollTrigger:{
-                trigger:product,
-                start:"top 85%"
-            },
-            y:60,
-            opacity:0,
-            duration:.8
-        });
-
-    });
-
-    gsap.utils.toArray(".timeline-item").forEach(item=>{
-
-        gsap.from(item,{
-            scrollTrigger:{
-                trigger:item,
-                start:"top 85%"
-            },
-            x:-80,
-            opacity:0,
-            duration:.8
-        });
-
-    });
-
-}
-
-/* ==============================
+/* ===========================
    PLANET PARALLAX
-============================== */
+=========================== */
 
-const planet = document.querySelector(".planet");
+const planet =
+document.querySelector(".planet");
 
 document.addEventListener("mousemove",(e)=>{
 
     if(!planet) return;
 
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    const x =
+    (e.clientX /
+    window.innerWidth - 0.5) * 25;
+
+    const y =
+    (e.clientY /
+    window.innerHeight - 0.5) * 25;
 
     planet.style.transform =
     `translate(${x}px, ${y}px)`;
 
 });
 
-/* ==============================
-   BUTTON HOVER EFFECT
-============================== */
+/* ===========================
+   GSAP ANIMATIONS
+=========================== */
+
+if(typeof gsap !== "undefined"){
+
+    gsap.registerPlugin(
+        ScrollTrigger
+    );
+
+    gsap.from(".hero-tag",{
+
+        opacity:0,
+        y:40,
+        duration:1
+
+    });
+
+    gsap.from(".hero h1",{
+
+        opacity:0,
+        y:80,
+        duration:1.2,
+        delay:.2
+
+    });
+
+    gsap.from(".hero-subtitle",{
+
+        opacity:0,
+        y:50,
+        duration:1,
+        delay:.4
+
+    });
+
+    gsap.from(".hero-buttons",{
+
+        opacity:0,
+        y:40,
+        duration:1,
+        delay:.6
+
+    });
+
+    gsap.utils.toArray(".card")
+    .forEach(card=>{
+
+        gsap.from(card,{
+
+            scrollTrigger:{
+
+                trigger:card,
+                start:"top 85%"
+
+            },
+
+            opacity:0,
+            y:60,
+            duration:.8
+
+        });
+
+    });
+
+    gsap.utils.toArray(".product")
+    .forEach(product=>{
+
+        gsap.from(product,{
+
+            scrollTrigger:{
+
+                trigger:product,
+                start:"top 85%"
+
+            },
+
+            opacity:0,
+            y:60,
+            duration:.8
+
+        });
+
+    });
+
+    gsap.utils.toArray(".timeline-item")
+    .forEach(item=>{
+
+        gsap.from(item,{
+
+            scrollTrigger:{
+
+                trigger:item,
+                start:"top 85%"
+
+            },
+
+            opacity:0,
+            x:-80,
+            duration:.8
+
+        });
+
+    });
+
+}
+
+/* ===========================
+   BUTTON EFFECT
+=========================== */
 
 document.querySelectorAll(
 ".btn-primary,.btn-secondary"
 ).forEach(btn=>{
 
-    btn.addEventListener("mouseenter",()=>{
+    btn.addEventListener(
+        "mouseenter",
+        ()=>{
 
-        btn.style.transform =
-        "translateY(-4px)";
+            btn.style.transform =
+            "translateY(-5px)";
 
-    });
+        }
+    );
 
-    btn.addEventListener("mouseleave",()=>{
+    btn.addEventListener(
+        "mouseleave",
+        ()=>{
 
-        btn.style.transform =
-        "translateY(0px)";
+            btn.style.transform =
+            "translateY(0px)";
 
-    });
+        }
+    );
 
 });
