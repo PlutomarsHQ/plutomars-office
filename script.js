@@ -1,1 +1,1 @@
-console.log("Plutomars Office Website Loaded");
+console.log("Plutomars Website Loaded");
