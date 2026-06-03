@@ -33,7 +33,7 @@ content:"";
 position:fixed;
 width:700px;
 height:700px;
-background:radial-gradient(circle,rgba(89,207,255,.10),transparent 70%);
+background:radial-gradient(circle,rgba(255,45,45,.08),transparent 70%);
 left:var(--mouse-x);
 top:var(--mouse-y);
 transform:translate(-50%,-50%);
@@ -197,10 +197,9 @@ z-index:2;
 
 .hero-tag{
 color:#ff2d2d;
-}
 letter-spacing:3px;
 margin-bottom:20px;
-} 
+}
 
 .hero h1{
 font-size:clamp(48px,7vw,110px);
