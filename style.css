@@ -85,12 +85,24 @@ text-decoration:none;font-weight:700;transition:.3s;
 .btn-secondary{border:1px solid #fff;color:#fff;}
 
 .planet{
-position:absolute;width:500px;height:500px;
-right:-150px;top:100px;border-radius:50%;
-background:radial-gradient(circle at 30% 30%,#ffae57,#ff6b35,#7c2200);
-opacity:.18;pointer-events:none;z-index:1;
-}
+position:absolute;
 
+width:500px;
+height:500px;
+
+right:-150px;
+top:100px;
+
+background-image:url("assets/images/mars.png");
+
+background-size:cover;
+background-position:center;
+
+opacity:.9;
+
+pointer-events:none;
+z-index:1;
+}
 .container{max-width:1300px;margin:auto;}
 .section-header{margin-bottom:50px;}
 .section-tag{color:var(--blue);letter-spacing:3px;margin-bottom:15px;}
