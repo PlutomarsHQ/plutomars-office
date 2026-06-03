@@ -99,9 +99,28 @@ z-index:1000;
 }
 
 .logo{
+display:flex;
+align-items:center;
+gap:12px;
 font-size:30px;
 font-weight:900;
-color:var(--blue);
+color:#59cfff;
+}
+
+.logo img{
+width:42px;
+height:42px;
+object-fit:contain;
+}
+
+.logo span{
+color:#59cfff;
+}
+
+.loader-logo img{
+width:120px;
+height:120px;
+object-fit:contain;
 }
 
 .nav-links{
