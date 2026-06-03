@@ -1,105 +1,123 @@
-/* =================================
-   PLUTOMARS VERSION 5
-================================= */
+/* ==================================
+   PLUTOMARS VERSION 6.1
+================================== */
 
-console.log("Plutomars V5 Loaded");
+console.log("Plutomars V6.1 Loaded");
 
-/* ===========================
-   CUSTOM CURSOR
-=========================== */
-
-const cursor = document.querySelector(".cursor");
-
-document.addEventListener("mousemove", (e) => {
-
-    if(cursor){
-
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-
-    }
-
-});
-
-/* ===========================
+/* ==============================
    SPOTLIGHT EFFECT
-=========================== */
+============================== */
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove",(e)=>{
 
-    document.body.style.setProperty(
-        "--mouse-x",
-        `${e.clientX}px`
-    );
+document.body.style.setProperty(
+"--mouse-x",
+`${e.clientX}px`
+);
 
-    document.body.style.setProperty(
-        "--mouse-y",
-        `${e.clientY}px`
-    );
+document.body.style.setProperty(
+"--mouse-y",
+`${e.clientY}px`
+);
 
 });
 
-/* ===========================
+/* ==============================
+   MOBILE MENU
+============================== */
+
+const menuBtn =
+document.querySelector(".menu-btn");
+
+const mobileMenu =
+document.querySelector(".mobile-menu");
+
+if(menuBtn && mobileMenu){
+
+menuBtn.addEventListener("click",()=>{
+
+mobileMenu.classList.toggle("active");
+
+});
+
+}
+
+/* ==============================
    CARD GLOW EFFECT
-=========================== */
+============================== */
 
-const cards = document.querySelectorAll(".card");
+const cards =
+document.querySelectorAll(".card");
 
-cards.forEach(card => {
+cards.forEach(card=>{
 
-    card.addEventListener("mousemove", (e) => {
+card.addEventListener("mousemove",(e)=>{
 
-        const rect = card.getBoundingClientRect();
+const rect =
+card.getBoundingClientRect();
 
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+const x =
+e.clientX - rect.left;
 
-        card.style.setProperty("--x", `${x}px`);
-        card.style.setProperty("--y", `${y}px`);
+const y =
+e.clientY - rect.top;
 
-    });
+card.style.setProperty(
+"--x",
+`${x}px`
+);
+
+card.style.setProperty(
+"--y",
+`${y}px`
+);
 
 });
 
-/* ===========================
-   COUNTERS
-=========================== */
+});
 
-const counters = document.querySelectorAll(".counter");
+/* ==============================
+   COUNTER ANIMATION
+============================== */
+
+const counters =
+document.querySelectorAll(".counter");
 
 function startCounters(){
 
-    counters.forEach(counter => {
+counters.forEach(counter=>{
 
-        const target = Number(counter.dataset.target);
+const target =
++counter.dataset.target;
 
-        let count = 0;
+let count = 0;
 
-        const step = Math.max(1, target / 100);
+const speed =
+target / 100;
 
-        function update(){
+function update(){
 
-            count += step;
+count += speed;
 
-            if(count < target){
+if(count < target){
 
-                counter.innerText =
-                Math.floor(count);
+counter.innerText =
+Math.floor(count);
 
-                requestAnimationFrame(update);
+requestAnimationFrame(update);
 
-            }else{
+}else{
 
-                counter.innerText =
-                target + "+";
+counter.innerText =
+target + "+";
 
-            }
+}
 
-        }
+}
 
-        update();
+update();
 
-    });
+});
 
 }
 
@@ -110,237 +128,248 @@ let counterStarted = false;
 
 if(statsSection){
 
-    const observer =
-    new IntersectionObserver((entries)=>{
+const observer =
+new IntersectionObserver((entries)=>{
 
-        entries.forEach(entry=>{
+entries.forEach(entry=>{
 
-            if(
-                entry.isIntersecting &&
-                !counterStarted
-            ){
+if(
+entry.isIntersecting &&
+!counterStarted
+){
 
-                startCounters();
+startCounters();
 
-                counterStarted = true;
-
-            }
-
-        });
-
-    },{
-
-        threshold:0.4
-
-    });
-
-    observer.observe(statsSection);
+counterStarted = true;
 
 }
 
-/* ===========================
-   NAVBAR EFFECT
-=========================== */
+});
+
+},{
+threshold:.4
+});
+
+observer.observe(statsSection);
+
+}
+
+/* ==============================
+   NAVBAR SCROLL EFFECT
+============================== */
 
 const navbar =
 document.querySelector(".navbar");
 
 window.addEventListener("scroll",()=>{
 
-    if(!navbar) return;
+if(!navbar) return;
 
-    if(window.scrollY > 50){
+if(window.scrollY > 50){
 
-        navbar.style.background =
-        "rgba(5,8,22,.85)";
+navbar.style.background =
+"rgba(5,8,22,.85)";
 
-        navbar.style.borderColor =
-        "rgba(89,207,255,.15)";
+navbar.style.borderColor =
+"rgba(89,207,255,.15)";
 
-    }else{
+}else{
 
-        navbar.style.background =
-        "rgba(255,255,255,.04)";
+navbar.style.background =
+"rgba(255,255,255,.04)";
 
-        navbar.style.borderColor =
-        "rgba(255,255,255,.08)";
+navbar.style.borderColor =
+"rgba(255,255,255,.08)";
 
-    }
+}
 
 });
 
-/* ===========================
+/* ==============================
    PLANET PARALLAX
-=========================== */
+============================== */
 
 const planet =
 document.querySelector(".planet");
 
-document.addEventListener("mousemove",(e)=>{
+document.addEventListener(
+"mousemove",
+(e)=>{
 
-    if(!planet) return;
+if(!planet) return;
 
-    const x =
-    (e.clientX /
-    window.innerWidth - 0.5) * 25;
+const x =
+(e.clientX /
+window.innerWidth - .5)
+* 25;
 
-    const y =
-    (e.clientY /
-    window.innerHeight - 0.5) * 25;
+const y =
+(e.clientY /
+window.innerHeight - .5)
+* 25;
 
-    planet.style.transform =
-    `translate(${x}px, ${y}px)`;
+planet.style.transform =
+`translate(${x}px,${y}px)`;
 
-});
+}
+);
 
-/* ===========================
+/* ==============================
+   LOADER
+============================== */
+
+window.addEventListener(
+"load",
+()=>{
+
+const loader =
+document.querySelector(".loader");
+
+if(loader){
+
+setTimeout(()=>{
+
+loader.classList.add("hide");
+
+},1500);
+
+}
+
+}
+);
+
+/* ==============================
    GSAP ANIMATIONS
-=========================== */
+============================== */
 
 if(typeof gsap !== "undefined"){
 
-    gsap.registerPlugin(
-        ScrollTrigger
-    );
+gsap.registerPlugin(
+ScrollTrigger
+);
 
-    gsap.from(".hero-tag",{
+gsap.from(".hero-tag",{
 
-        opacity:0,
-        y:40,
-        duration:1
+opacity:0,
+y:40,
+duration:1
 
-    });
+});
 
-    gsap.from(".hero h1",{
+gsap.from(".hero h1",{
 
-        opacity:0,
-        y:80,
-        duration:1.2,
-        delay:.2
+opacity:0,
+y:80,
+duration:1.2,
+delay:.2
 
-    });
+});
 
-    gsap.from(".hero-subtitle",{
+gsap.from(".hero-subtitle",{
 
-        opacity:0,
-        y:50,
-        duration:1,
-        delay:.4
+opacity:0,
+y:50,
+duration:1,
+delay:.4
 
-    });
+});
 
-    gsap.from(".hero-buttons",{
+gsap.from(".hero-buttons",{
 
-        opacity:0,
-        y:40,
-        duration:1,
-        delay:.6
+opacity:0,
+y:40,
+duration:1,
+delay:.6
 
-    });
+});
 
-    gsap.utils.toArray(".card")
-    .forEach(card=>{
+gsap.utils
+.toArray(".card")
+.forEach(card=>{
 
-        gsap.from(card,{
+gsap.from(card,{
 
-            scrollTrigger:{
+scrollTrigger:{
+trigger:card,
+start:"top 85%"
+},
 
-                trigger:card,
-                start:"top 85%"
+opacity:0,
+y:60,
+duration:.8
 
-            },
+});
 
-            opacity:0,
-            y:60,
-            duration:.8
+});
 
-        });
+gsap.utils
+.toArray(".product")
+.forEach(product=>{
 
-    });
+gsap.from(product,{
 
-    gsap.utils.toArray(".product")
-    .forEach(product=>{
+scrollTrigger:{
+trigger:product,
+start:"top 85%"
+},
 
-        gsap.from(product,{
+opacity:0,
+y:60,
+duration:.8
 
-            scrollTrigger:{
+});
 
-                trigger:product,
-                start:"top 85%"
+});
 
-            },
+gsap.utils
+.toArray(".timeline-item")
+.forEach(item=>{
 
-            opacity:0,
-            y:60,
-            duration:.8
+gsap.from(item,{
 
-        });
+scrollTrigger:{
+trigger:item,
+start:"top 85%"
+},
 
-    });
+opacity:0,
+x:-80,
+duration:.8
 
-    gsap.utils.toArray(".timeline-item")
-    .forEach(item=>{
+});
 
-        gsap.from(item,{
-
-            scrollTrigger:{
-
-                trigger:item,
-                start:"top 85%"
-
-            },
-
-            opacity:0,
-            x:-80,
-            duration:.8
-
-        });
-
-    });
+});
 
 }
 
-/* ===========================
-   BUTTON EFFECT
-=========================== */
+/* ==============================
+   BUTTON HOVER
+============================== */
 
-document.querySelectorAll(
+document
+.querySelectorAll(
 ".btn-primary,.btn-secondary"
-).forEach(btn=>{
+)
+.forEach(btn=>{
 
-    btn.addEventListener(
-        "mouseenter",
-        ()=>{
+btn.addEventListener(
+"mouseenter",
+()=>{
 
-            btn.style.transform =
-            "translateY(-5px)";
-
-        }
-    );
-
-    btn.addEventListener(
-        "mouseleave",
-        ()=>{
-
-            btn.style.transform =
-            "translateY(0px)";
-
-        }
-    );
-
-});
-const menuBtn =
-document.querySelector(".menu-btn");
-
-const mobileMenu =
-document.querySelector(".mobile-menu");
-
-if(menuBtn){
-
-menuBtn.addEventListener("click",()=>{
-
-mobileMenu.classList.toggle("active");
-
-});
+btn.style.transform =
+"translateY(-5px)";
 
 }
+);
+
+btn.addEventListener(
+"mouseleave",
+()=>{
+
+btn.style.transform =
+"translateY(0px)";
+
+}
+);
+
+});
