@@ -108,8 +108,8 @@ color:#59cfff;
 }
 
 .logo img{
-width:42px;
-height:42px;
+width:54px;
+height:54px;
 object-fit:contain;
 }
 
@@ -244,16 +244,24 @@ color:white;
 
 .planet{
 position:absolute;
-width:500px;
-height:500px;
-right:-150px;
-top:100px;
-border-radius:50%;
-background:radial-gradient(circle at 30% 30%,#ffae57,#ff6b35,#7c2200);
-opacity:.18;
-pointer-events:none;
-}
 
+width:420px;
+height:420px;
+
+right:-120px;
+top:180px;
+
+background-image:url("assets/images/mars.png");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+opacity:.95;
+
+pointer-events:none;
+
+z-index:1;
+}
 .container{
 max-width:1300px;
 margin:auto;
@@ -360,12 +368,18 @@ color:var(--muted);
 padding-left:7%;
 padding-right:7%;
 }
+@media(max-width:768px){
+
 .planet{
+
 width:260px;
 height:260px;
-right:-100px;
-top:180px;
+
+right:-70px;
+top:220px;
+
 }
+
 }
 
 @media(max-width:480px){
