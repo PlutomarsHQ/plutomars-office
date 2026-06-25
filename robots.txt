@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://plutomarshq.github.io/plutomars-office/sitemap.xml
